@@ -11,7 +11,7 @@ class ListTrackersViewController: UIViewController {
     let addTrackerButton: UIButton = {
         let button = UIButton.systemButton(
             with: UIImage(named: "Plus")!,
-            target: ListTrackersViewController.self,
+            target: self,
             action: #selector(addTrackerButtonTapped)
         )
         button.tintColor = UIColor.trackerBlack
@@ -23,11 +23,14 @@ class ListTrackersViewController: UIViewController {
         let picker = UIDatePicker()
         picker.preferredDatePickerStyle = .compact
         picker.datePickerMode = .date
+        picker.locale = Locale(identifier: "ru_Ru")
+        picker.calendar.firstWeekday = 2
         picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         return picker
     }()
     
-    let largeTitleLabel: UILabel = {
+    private let largeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Трекеры"
         label.textColor = UIColor.trackerBlack
@@ -52,7 +55,7 @@ class ListTrackersViewController: UIViewController {
         return image
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Что будем отслеживать?"
         label.textColor = UIColor.trackerBlack
@@ -89,6 +92,7 @@ class ListTrackersViewController: UIViewController {
         largeTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         
         view.addSubview(searchField)
+        searchField.heightAnchor.constraint(equalToConstant: 36).isActive = true
         searchField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 136).isActive = true
         searchField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         searchField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
@@ -103,6 +107,11 @@ class ListTrackersViewController: UIViewController {
     }
     
     @objc func addTrackerButtonTapped() {
-        print("addTrackerButtonTapped")
+        let newTrackerViewController = NewTrackerViewController()
+        present(newTrackerViewController, animated: true, completion: nil)
+    }
+    
+    @objc func dateChanged() {
+        
     }
 }

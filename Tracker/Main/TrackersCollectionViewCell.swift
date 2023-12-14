@@ -1,17 +1,18 @@
 //
-//  ColorCollectionViewCell.swift
+//  TrackerCollectionViewCell.swift
 //  Tracker
 //
-//  Created by Владимир Богомолов on 25.09.2023.
+//  Created by Владимир Богомолов on 02.12.2023.
 //
 
 import UIKit
 
-class ColorCollectionViewCell: UICollectionViewCell {
+class TrackerCollectionViewCell: UICollectionViewCell {
     let titleLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
